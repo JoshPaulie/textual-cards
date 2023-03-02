@@ -1,0 +1,41 @@
+[project]
+name = "textual-cards"
+description = 'Textual driven flashcard app'
+readme = "README.md"
+requires-python = ">=3.10"
+# license = "MIT"
+keywords = ["textual", "study", "college"]
+authors = [
+  { name = "bexli", email = "bex@bexli.co" },
+]
+classifiers = [
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+]
+dependencies = ["textual==0.13.0"]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+  "textual[dev]==0.13.0",
+  "black",
+  "pylint"
+]
+
+[project.scripts]
+cards = "textual_cards"
+
+[project.urls]
+Documentation = "https://github.com/joshpaulie/textual-cards#readme"
+Issues = "https://github.com/joshpaulie/textual-cards/issues"
+Source = "https://github.com/joshpaulie/textual-cards"
+
+[tool.black]
+line-length = 180
+
+[tool.pylint.format]
+max-line-length = 180
+
+[tool.pylint."messages control"]
+disable =["attribute-defined-outside-init"]

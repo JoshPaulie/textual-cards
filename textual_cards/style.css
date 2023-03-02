@@ -1,0 +1,13 @@
+Screen {
+  align: center middle;
+}
+
+#CardText {
+  text-align: center;
+}
+
+#CardNumLabel {
+  dock: bottom;
+  text-align: right;
+  offset: 0 -1;
+}
