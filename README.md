@@ -21,7 +21,7 @@
 This is not a published package.
 
 ```console
-pipx install git+https://github.com/JoshPaulie/textual-cards
+pipx install <TBD>
 ```
 
 ## License
