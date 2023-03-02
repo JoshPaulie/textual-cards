@@ -1,4 +1,5 @@
 import pathlib
+from typing import Optional
 
 from textual.app import App, ComposeResult
 from textual.binding import Binding
@@ -14,14 +15,14 @@ def get_cards(path):
 
 class Cards(App):
     BINDINGS = [
-        Binding("left,h", "change_card(-1)", "Prev"),
-        Binding("right,l", "change_card(1)", "Next"),
-        Binding("space", "flip_card", "Flip"),
+        Binding("left,h", "change_card(-1)", "Prev", key_display="←"),
+        Binding("right,l", "change_card(1)", "Next", key_display="→"),
+        Binding("space,j,k,up,down", "flip_card", "Flip", key_display="↑"),
     ]
     CSS_PATH = "style.css"
 
     def compose(self) -> ComposeResult:  # type: ignore
-        self.card_text = Static("Welcome!", id="CardText")
+        self.card_text = Static(id="CardText")
         yield self.card_text
         yield Footer()
         self.current_card_num_label = Label(id="CardNumLabel")
@@ -30,6 +31,8 @@ class Cards(App):
     def on_mount(self):
         self.cards = get_cards("deck")
         self.current_card_indx = 0
+        self.current_question = ""
+        self.current_answer = ""
         self.action_change_card(0)
         self.question_side = True
 
@@ -42,21 +45,26 @@ class Cards(App):
             self.current_card_indx = 0
         else:
             self.current_card_indx += move_amt
-        self.question_side = True
 
         card = self.cards[self.current_card_indx]
-        question, _ = card.split("|")
-        self.card_text.update(f"[red]Question[/]: {question}")
+        self.current_question, self.current_answer = card.split("|")
+
+        self.action_flip_card(question_side_up=True)
         self.current_card_num_label.update(f"{self.current_card_indx + 1}/{len(self.cards)}")
 
-    def action_flip_card(self):
-        card = self.cards[self.current_card_indx]
-        question, answer = card.split("|")
+    def action_flip_card(self, question_side_up=None):
+        formatted_question = f"Q: [italic]{self.current_question}"
+
+        # used with self.change_card()
+        if question_side_up:
+            self.question_side = True
+            self.card_text.update(formatted_question)
+            return
+
+        # If not used with change card, flip the card back and forth
         if self.question_side:
-            self.card_text.update(f"[red]Answer[/]: {answer}")
-            # ? Could this be question_side = not question_side
-            # Maybe. 😌
+            self.card_text.update(self.current_answer)
             self.question_side = False
         else:
-            self.card_text.update(f"[red]Question[/]: {question}")
+            self.card_text.update(formatted_question)
             self.question_side = True
