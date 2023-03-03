@@ -21,6 +21,7 @@ class CardsApp(App):
         Binding("right,l", "change_card(1)", "Next", key_display="→"),
         Binding("space,j,k,up,down", "flip_card", "Flip", key_display="↑"),
         # Binding("f", "push_screen('results')", "!", show=False),
+        Binding("enter", "memorized", "Got it! 👍", key_display="⏎"),
     ]
     SCREENS = {"results": Results}
     CSS_PATH = "style.css"
@@ -39,6 +40,10 @@ class CardsApp(App):
         self.current_answer = ""
         self.action_change_card(0)
         self.question_side = True
+        self.memorized_cards = []
+
+    def update_current_num_label(self):
+        self.current_card_num_label.update(f"{self.current_card_indx + 1}/{len(self.cards)}")
 
     def action_change_card(self, move_amt):
         # Creates a looping effect where the last card
@@ -54,9 +59,9 @@ class CardsApp(App):
         self.current_question, self.current_answer = card.split("|")
 
         self.action_flip_card(question_side_up=True)
-        self.current_card_num_label.update(f"{self.current_card_indx + 1}/{len(self.cards)}")
+        self.update_current_num_label()
 
-    def action_flip_card(self, question_side_up=None):
+    def action_flip_card(self, question_side_up: Optional[bool] = None):
         formatted_question = f"Q: [italic]{self.current_question}"
 
         # used with self.change_card()
@@ -72,3 +77,8 @@ class CardsApp(App):
         else:
             self.card_text.update(formatted_question)
             self.question_side = True
+
+    def action_memorized(self):
+        card = self.cards[self.current_card_indx]
+        self.cards.remove(card)
+        self.update_current_num_label()
