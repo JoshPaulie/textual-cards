@@ -5,6 +5,8 @@ from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.widgets import Footer, Label, Static
 
+from .screens.results import Results
+
 
 def get_cards(path):
     cards = pathlib.Path(path).read_text().splitlines()
@@ -18,7 +20,9 @@ class CardsApp(App):
         Binding("left,h", "change_card(-1)", "Prev", key_display="←"),
         Binding("right,l", "change_card(1)", "Next", key_display="→"),
         Binding("space,j,k,up,down", "flip_card", "Flip", key_display="↑"),
+        # Binding("f", "push_screen('results')", "!", show=False),
     ]
+    SCREENS = {"results": Results}
     CSS_PATH = "style.css"
 
     def compose(self) -> ComposeResult:  # type: ignore
