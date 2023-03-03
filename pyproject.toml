@@ -28,7 +28,7 @@ dev = [
 ]
 
 [project.scripts]
-cards = "textual_cards"
+cards = "textual_cards.app:main"
 
 [project.urls]
 Documentation = "https://github.com/joshpaulie/textual-cards#readme"

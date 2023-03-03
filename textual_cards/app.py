@@ -89,3 +89,8 @@ class CardsApp(App):
     def action_shuffle_deck(self):
         shuffle(self.deck)
         self.action_change_card(-self.current_card_indx)
+
+
+def main():
+    app = CardsApp()
+    app.run()
