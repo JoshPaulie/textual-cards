@@ -13,7 +13,7 @@ def get_cards(path):
     return cards
 
 
-class Cards(App):
+class CardsApp(App):
     BINDINGS = [
         Binding("left,h", "change_card(-1)", "Prev", key_display="←"),
         Binding("right,l", "change_card(1)", "Next", key_display="→"),
