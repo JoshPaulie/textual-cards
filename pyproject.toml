@@ -43,3 +43,6 @@ max-line-length = 180
 
 [tool.pylint."messages control"]
 disable =["attribute-defined-outside-init"]
+
+[tool.setuptools]
+packages = ["textual_cards"]
