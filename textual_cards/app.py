@@ -34,28 +34,29 @@ class CardsApp(App):
         yield self.current_card_num_label
 
     def on_mount(self):
-        self.cards = get_cards("deck")
+        self.deck = get_cards("deck")
         self.current_card_indx = 0
         self.current_question = ""
         self.current_answer = ""
         self.action_change_card(0)
         self.question_side = True
         self.memorized_cards = []
+        self.init_deck_len = len(self.deck)
 
     def update_current_num_label(self):
-        self.current_card_num_label.update(f"{self.current_card_indx + 1}/{len(self.cards)}")
+        self.current_card_num_label.update(f"{self.current_card_indx + 1}/{len(self.deck)}")
 
     def action_change_card(self, move_amt):
         # Creates a looping effect where the last card
         # wraps to the first and vice versa
         if self.current_card_indx == 0 and move_amt == -1:
-            self.current_card_indx = len(self.cards) - 1
-        elif self.current_card_indx == len(self.cards) - 1 and move_amt == 1:
+            self.current_card_indx = len(self.deck) - 1
+        elif self.current_card_indx == len(self.deck) - 1 and move_amt == 1:
             self.current_card_indx = 0
         else:
             self.current_card_indx += move_amt
 
-        card = self.cards[self.current_card_indx]
+        card = self.deck[self.current_card_indx]
         self.current_question, self.current_answer = card.split("|")
 
         self.action_flip_card(question_side_up=True)
@@ -79,6 +80,6 @@ class CardsApp(App):
             self.question_side = True
 
     def action_memorized(self):
-        card = self.cards[self.current_card_indx]
-        self.cards.remove(card)
+        card = self.deck[self.current_card_indx]
+        self.deck.remove(card)
         self.update_current_num_label()
