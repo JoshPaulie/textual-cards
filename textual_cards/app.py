@@ -1,4 +1,5 @@
 import pathlib
+from random import shuffle
 from typing import Optional
 
 from textual.app import App, ComposeResult
@@ -22,6 +23,7 @@ class CardsApp(App):
         Binding("space,j,k,up,down", "flip_card", "Flip", key_display="↑"),
         # Binding("f", "push_screen('results')", "!", show=False),
         Binding("enter", "memorized", "Got it! 👍", key_display="⏎"),
+        Binding("s", "shuffle_deck", "Shuffle"),
     ]
     SCREENS = {"results": Results}
     CSS_PATH = "style.css"
@@ -83,3 +85,7 @@ class CardsApp(App):
         card = self.deck[self.current_card_indx]
         self.deck.remove(card)
         self.update_current_num_label()
+
+    def action_shuffle_deck(self):
+        shuffle(self.deck)
+        self.action_change_card(-self.current_card_indx)
