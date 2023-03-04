@@ -21,7 +21,6 @@ class CardsApp(App):
         Binding("left,h", "change_card(-1)", "Prev", key_display="←"),
         Binding("right,l", "change_card(1)", "Next", key_display="→"),
         Binding("space,j,k,up,down", "flip_card", "Flip", key_display="↑"),
-        # Binding("f", "push_screen('results')", "!", show=False),
         Binding("enter", "memorized", "Got it! 👍", key_display="⏎"),
         Binding("s", "shuffle_deck", "Shuffle"),
     ]
@@ -34,8 +33,6 @@ class CardsApp(App):
         yield Footer()
         self.current_card_num_label = Label(id="CardNumLabel")
         yield self.current_card_num_label
-        self.memorized_percentage_label = Label("0%", id="MemorizedPercentLabel")
-        yield self.memorized_percentage_label
 
     def on_mount(self):
         self.deck = get_cards("deck")
