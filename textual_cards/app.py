@@ -34,6 +34,8 @@ class CardsApp(App):
         yield Footer()
         self.current_card_num_label = Label(id="CardNumLabel")
         yield self.current_card_num_label
+        self.memorized_percentage_label = Label("0%", id="MemorizedPercentLabel")
+        yield self.memorized_percentage_label
 
     def on_mount(self):
         self.deck = get_cards("deck")

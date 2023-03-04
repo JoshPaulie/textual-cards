@@ -11,3 +11,10 @@ Screen {
   text-align: right;
   offset: 0 -1;
 }
+
+#MemorizedPercentLabel {
+  dock: bottom;
+  text-align: left;
+  offset: 0 -1;
+  /* align: right middle; */
+}
