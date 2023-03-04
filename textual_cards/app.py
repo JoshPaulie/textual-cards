@@ -83,6 +83,7 @@ class CardsApp(App):
     def action_memorized(self):
         card = self.deck[self.current_card_indx]
         self.deck.remove(card)
+        self.action_change_card(0)
         self.update_current_num_label()
 
     def action_shuffle_deck(self):
