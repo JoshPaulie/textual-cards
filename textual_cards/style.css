@@ -1,13 +1,58 @@
 Screen {
+  background: #24273a; /* Base */
+  color: #cad3f5; /* Text */
+}
+
+#Card {
+  height: 6fr;
+  border: tall #363a4f;
+  align: center middle;
+  background: #181926;
+}
+
+#StatusBar {
+  height: 1fr;
   align: center middle;
 }
 
 #CardText {
   text-align: center;
+  align: center middle;
 }
 
 #CardNumLabel {
+  text-align: center;
+}
+
+Footer {
+  background: #24273a;
+  color: #cad3f5;
   dock: bottom;
-  text-align: right;
-  offset: 0 -1;
+  height: 1;
+}
+
+Footer > .footer--highlight {
+  background: #24273a;
+}
+
+Footer > .footer--highlight-key {
+  background: #363a4f;
+  text-style: bold;
+}
+
+Footer > .footer--key {
+  text-style: bold;
+  background: #1e2030;
+}
+
+/* Done Screen */
+#DoneContainer {
+  align: center middle;
+  margin: 2;
+  border: solid #363a4f;
+}
+
+#CongratsStatic {
+  text-align: center;
+  align: center middle;
 }

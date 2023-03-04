@@ -4,9 +4,18 @@ from typing import Optional
 
 from textual.app import App, ComposeResult
 from textual.binding import Binding
+from textual.containers import Container, Horizontal, Vertical
+from textual.screen import Screen
 from textual.widgets import Footer, Label, Static
 
-from .screens.results import Results
+
+class DoneScreen(Screen):
+    # todo app should totally exit (and eventually lead to a list of decks)
+    BINDINGS = [("any", "app.pop_screen", "Pop screen")]
+
+    def compose(self) -> ComposeResult:
+        with Container(id="DoneContainer"):
+            yield Static("Congrats! You've finished this deck. 🎉", id="CongratsStatic")
 
 
 def get_cards(path):
@@ -23,16 +32,24 @@ class CardsApp(App):
         Binding("space,j,k,up,down", "flip_card", "Flip", key_display="↑"),
         Binding("enter", "memorized", "Got it! 👍", key_display="⏎"),
         Binding("s", "shuffle_deck", "Shuffle"),
+        # todo | this should push a screen with a list of all the memorized cards
+        # todo | maybe the user can add selected cards back to the deck?
+        Binding("m", "show_memorized", "this should open a ", show=False),
     ]
-    SCREENS = {"results": Results}
+    SCREENS = {"DoneScreen": DoneScreen}
     CSS_PATH = "style.css"
 
-    def compose(self) -> ComposeResult:  # type: ignore
-        self.card_text = Static(id="CardText")
-        yield self.card_text
+    def compose(self) -> ComposeResult:
+        with Vertical():
+            with Horizontal(id="Card"):
+                self.card_text = Static(id="CardText")
+                yield self.card_text
+
+            with Horizontal(id="StatusBar"):
+                self.current_card_num_label = Static(id="CardNumLabel")
+                yield self.current_card_num_label
+
         yield Footer()
-        self.current_card_num_label = Label(id="CardNumLabel")
-        yield self.current_card_num_label
 
     def on_mount(self):
         self.deck = get_cards("deck")
@@ -74,7 +91,7 @@ class CardsApp(App):
 
         # If not used with change card, flip the card back and forth
         if self.question_side:
-            self.card_text.update(self.current_answer)
+            self.card_text.update(f"[#a6da95]{self.current_answer}")
             self.question_side = False
         else:
             self.card_text.update(formatted_question)
@@ -82,13 +99,26 @@ class CardsApp(App):
 
     def action_memorized(self):
         card = self.deck[self.current_card_indx]
+        self.memorized_cards.append(card)
         self.deck.remove(card)
-        self.action_change_card(0)
-        self.update_current_num_label()
+
+        # ? | indx goes out of bounds if you move the last card in the deck to the memorized "pile"
+        # ? | without correcting the current card indx. I'm not smart enough to tell why at the moment
+        if self.current_card_indx == len(self.deck):
+            self.current_card_indx -= 1
+
+        if len(self.deck) == 0:
+            self.push_screen("DoneScreen")
+        else:
+            self.action_change_card(0)
+            self.update_current_num_label()
 
     def action_shuffle_deck(self):
         shuffle(self.deck)
         self.action_change_card(-self.current_card_indx)
+
+    def action_show_memorized(self):
+        print(self.memorized_cards)
 
 
 def main():
