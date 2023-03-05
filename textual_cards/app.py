@@ -32,10 +32,10 @@ class CardsApp(App):
         Binding("space,j,k,up,down", "flip_card", "Flip", key_display="↑"),
         Binding("enter", "memorized", "Got it! 👍", key_display="⏎"),
         Binding("s", "shuffle_deck", "Shuffle"),
+        Binding("r", "reset_deck", "Reset"),
         # todo | this should push a screen with a list of all the memorized cards
         # todo | maybe the user can add selected cards back to the deck?
         Binding("m", "show_memorized", "Currently prints a list", show=False),
-        Binding("r", "reset_deck", "Reset Deck", show=False),
     ]
     SCREENS = {"DoneScreen": DoneScreen}
     CSS_PATH = "style.css"
