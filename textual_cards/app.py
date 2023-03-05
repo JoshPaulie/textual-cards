@@ -35,6 +35,7 @@ class CardsApp(App):
         # todo | this should push a screen with a list of all the memorized cards
         # todo | maybe the user can add selected cards back to the deck?
         Binding("m", "show_memorized", "Currently prints a list", show=False),
+        Binding("r", "reset_deck", "Reset Deck", show=False),
     ]
     SCREENS = {"DoneScreen": DoneScreen}
     CSS_PATH = "style.css"
@@ -107,15 +108,22 @@ class CardsApp(App):
         if self.current_card_indx == len(self.deck):
             self.current_card_indx -= 1
 
+        self.update_current_num_label()
         if len(self.deck) == 0:
             self.push_screen("DoneScreen")
+            self.card_text.update("Well done! 🙌")
         else:
             self.action_change_card(0)
-            self.update_current_num_label()
 
     def action_shuffle_deck(self):
         shuffle(self.deck)
         self.action_change_card(-self.current_card_indx)
+
+    def action_reset_deck(self):
+        self.deck.extend(self.memorized_cards)
+        self.memorized_cards.clear()
+        self.action_change_card(0)
+        self.action_shuffle_deck()
 
     def action_show_memorized(self):
         print(self.memorized_cards)
