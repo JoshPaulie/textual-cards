@@ -62,7 +62,7 @@ class CardsApp(App):
         self.init_deck_len = len(self.deck)
 
     def update_current_num_label(self):
-        self.current_card_num_label.update(f"{self.current_card_indx + 1}/{len(self.deck)}")
+        self.current_card_num_label.update(f"[#a6da95]{self.current_card_indx + 1}[/]/{len(self.deck)}")
 
     def action_change_card(self, move_amt):
         # Creates a looping effect where the last card
