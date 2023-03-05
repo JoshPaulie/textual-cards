@@ -11,7 +11,7 @@ from textual.widgets import Footer, Label, Static
 
 class DoneScreen(Screen):
     # todo app should totally exit (and eventually lead to a list of decks)
-    BINDINGS = [("any", "app.pop_screen", "Pop screen")]
+    BINDINGS = [("escape,space", "app.pop_screen", "Pop screen")]
 
     def compose(self) -> ComposeResult:
         with Container(id="DoneContainer"):
@@ -34,7 +34,7 @@ class CardsApp(App):
         Binding("s", "shuffle_deck", "Shuffle"),
         # todo | this should push a screen with a list of all the memorized cards
         # todo | maybe the user can add selected cards back to the deck?
-        Binding("m", "show_memorized", "this should open a ", show=False),
+        Binding("m", "show_memorized", "Currently prints a list", show=False),
     ]
     SCREENS = {"DoneScreen": DoneScreen}
     CSS_PATH = "style.css"
