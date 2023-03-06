@@ -1,13 +1,40 @@
+$catpp-rosewater:	#f4dbd6;
+$catpp-flamingo:	#f0c6c6;
+$catpp-pink:	#f5bde6;
+$catpp-mauve:	#c6a0f6;
+$catpp-red:	#ed8796;
+$catpp-maroon:	#ee99a0;
+$catpp-peach:	#f5a97f;
+$catpp-yellow:	#eed49f;
+$catpp-green:	#a6da95;
+$catpp-teal:	#8bd5ca;
+$catpp-sky:	#91d7e3;
+$catpp-sapphire:	#7dc4e4;
+$catpp-blue:	#8aadf4;
+$catpp-lavender:	#b7bdf8;
+$catpp-text:	#cad3f5;
+$catpp-subtext1:	#b8c0e0;
+$catpp-subtext0:	#a5adcb;
+$catpp-overlay2:	#939ab7;
+$catpp-overlay1:	#8087a2;
+$catpp-overlay0:	#6e738d;
+$catpp-surface2:	#5b6078;
+$catpp-surface1:	#494d64;
+$catpp-surface0:	#363a4f;
+$catpp-base:	#24273a;
+$catpp-mantle:	#1e2030;
+$catpp-crust:	#181926;
+
 Screen {
-  background: #24273a; /* Base */
-  color: #cad3f5; /* Text */
+  background: $catpp-base;
+  color: $catpp-text;
 }
 
 #Card {
   height: 6fr;
-  border: tall #363a4f;
+  border: tall $catpp-surface0;
   align: center middle;
-  background: #181926;
+  background: $catpp-crust;
 }
 
 #StatusBar {
@@ -25,31 +52,31 @@ Screen {
 }
 
 Footer {
-  background: #24273a;
-  color: #cad3f5;
+  background: $catpp-base;
+  color: $catpp-text;
   dock: bottom;
   height: 1;
 }
 
 Footer > .footer--highlight {
-  background: #24273a;
-  color: #a6da95;
+  background: $catpp-base;
+  color: $catpp-green;
 }
 
 Footer > .footer--highlight-key {
-  background: #363a4f;
+  background: $catpp-surface0;
   text-style: bold;
 }
 
 Footer > .footer--key {
   text-style: bold;
-  background: #1e2030;
+  background: $catpp-mantle;
 }
 
 /* Done Screen */
 #DoneContainer {
   align: center middle;
-  border: solid #363a4f;
+  border: solid $catpp-surface0;
 }
 
 #CongratsStatic {
