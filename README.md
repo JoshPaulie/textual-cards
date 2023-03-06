@@ -8,26 +8,30 @@
 
 - [textual-cards](#textual-cards)
   - [Installation](#installation)
+    - [`pipx`](#pipx)
     - [Manual](#manual)
-    - [`pipx` (preferred)](#pipx-preferred)
   - [License](#license)
 
 ## Installation
 
 This is not a published package.
 
-### Manual
-```console
-git clone <repo>
-cd <repo>
-python -m venv .venv
-<activate venv>
-python -m textual_cards
-```
-
-### `pipx` (preferred)
+### `pipx`
+> After publishing, this will be the preferred method
 ```console
 pipx install <TBD>
 ```
+
+### Manual
+> If you, for whatever reason, want to use it *now*, follow these steps
+```console
+git clone https://github.com/joshpaulie/textual-cards
+cd textual-cards
+python -m venv .venv
+<activate venv>
+python -m pip -e install .
+python -m textual_cards
+```
+
 ## License
 `textual-cards` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
