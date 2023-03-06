@@ -10,6 +10,7 @@
   - [Installation](#installation)
     - [Manual](#manual)
     - [`pipx` (preferred)](#pipx-preferred)
+  - [License](#license)
 
 ## Installation
 
@@ -28,6 +29,5 @@ python -m textual_cards
 ```console
 pipx install <TBD>
 ```
-----
-
+## License
 `textual-cards` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
