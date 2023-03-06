@@ -38,7 +38,7 @@ class CardsApp(App):
         Binding("m", "show_memorized", "Currently prints a list", show=False),
     ]
     SCREENS = {"DoneScreen": DoneScreen}
-    CSS_PATH = "style.css"
+    CSS_PATH = "style.scss"
 
     def compose(self) -> ComposeResult:
         with Vertical():
