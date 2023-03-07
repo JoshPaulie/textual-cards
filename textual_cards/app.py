@@ -5,6 +5,7 @@ from typing import Optional
 from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.containers import Container, Horizontal, Vertical
+from textual.reactive import reactive
 from textual.screen import Screen
 from textual.widgets import Footer, Label, Static
 
@@ -40,6 +41,13 @@ class CardsApp(App):
     SCREENS = {"DoneScreen": DoneScreen}
     CSS_PATH = "style.scss"
 
+    deck = reactive([])
+    current_card_indx = reactive(0)
+    current_question = reactive("")
+    current_answer = reactive("")
+    question_side = reactive(False)
+    memorized_cards = reactive([])
+
     def compose(self) -> ComposeResult:
         with Vertical():
             with Horizontal(id="Card"):
@@ -54,13 +62,7 @@ class CardsApp(App):
 
     def on_mount(self):
         self.deck = get_cards("deck")
-        self.current_card_indx = 0
-        self.current_question = ""
-        self.current_answer = ""
         self.action_change_card(0)
-        self.question_side = True
-        self.memorized_cards = []
-        self.init_deck_len = len(self.deck)
 
     def update_current_num_label(self):
         self.current_card_num_label.update(f"[#a6da95]{self.current_card_indx + 1}[/]/{len(self.deck)}")
