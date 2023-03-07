@@ -1,0 +1,3 @@
+- 'Watch' the index change, adjust current question and answers accordingly
+- maybe even change the card text?
+- 'Validate' to make sure index doesn't go out of bounds
