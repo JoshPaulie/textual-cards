@@ -48,6 +48,20 @@ class CardsApp(App):
     question_side = reactive(False)
     memorized_cards = reactive([])
 
+    def watch_current_card_indx(self):
+        # todo - set question side to true
+        # todo - update current question & answer with current card Q/A
+        print(str(self.current_card_indx))
+
+    def watch_question_side(self):
+        # todo - logic for changing the card text to appropriate Q/A
+        pass
+
+    # def validate_current_card_indx(self, indx: int):
+    #     # Figure out if this would prevent an out of bound expection
+    #     # or if I can move the wrapping logic here (? maybe 🤔)
+    #     pass
+
     def compose(self) -> ComposeResult:
         with Vertical():
             with Horizontal(id="Card"):
@@ -77,13 +91,16 @@ class CardsApp(App):
         else:
             self.current_card_indx += move_amt
 
+        # ! these gets moved to watch_card_indx
         card = self.deck[self.current_card_indx]
         self.current_question, self.current_answer = card.split("|")
-
         self.action_flip_card(question_side_up=True)
         self.update_current_num_label()
 
     def action_flip_card(self, question_side_up: Optional[bool] = None):
+        # ! Nix the argument
+        # ! This will all get replaced with a simple switch for to "flip the card over"
+        # ! (aka switch self.question_side from true to false or vice versa)
         formatted_question = f"Q: [italic]{self.current_question}"
 
         # used with self.change_card()
