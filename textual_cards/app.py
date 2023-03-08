@@ -43,7 +43,7 @@ class CardsApp(App):
 
     deck = reactive([])
     memorized_cards = reactive([])
-    current_card_indx = reactive(int)
+    current_card_indx = reactive(int, always_update=True)
     current_question = reactive(str)
     current_answer = reactive(str)
     question_side = reactive(bool)
@@ -107,12 +107,14 @@ class CardsApp(App):
         if self.current_card_indx == len(self.deck):
             self.current_card_indx -= 1
 
+        # ! Checking if the deck is out of cards needs to be moved
+        # ! Rn, moving the removing the last card crashes the app (out of bounds)
         if len(self.deck) == 0:
             self.push_screen("DoneScreen")
             self.card_text.update("Well done! 🙌")
         else:
-            # ! Major: This whole app may need reconsidered
-            self.current_card_indx -= 1
+            # fyi because the card indx is set to auto update, nudging it like this refreshes the app
+            self.current_card_indx += 0
 
     def action_shuffle_deck(self):
         shuffle(self.deck)
