@@ -117,6 +117,10 @@ class CardsApp(App):
         self.memorized_cards.append(card)
         self.deck.remove(card)
 
+        # fyi If the last card is memorized, while other cards are still present in self.deck, the deck goes out of bounds. This prevents that
+        if self.current_card_indx == len(self.deck):
+            self.current_card_indx -= 1
+
         # fyi because the card indx is set to auto update, nudging it like this refreshes the app
         self.current_card_indx += 0
 
