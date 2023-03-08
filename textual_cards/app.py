@@ -48,7 +48,14 @@ class CardsApp(App):
     current_answer = reactive(str)
     question_side = reactive(bool)
 
+    # ! This function is PACKED. Needs iteration
     def watch_current_card_indx(self):
+        # if no more cards, Done screen
+        if len(self.deck) == 0:
+            self.push_screen("DoneScreen")
+            self.card_text.update("Well done! 🙌")
+            return
+
         current_card = self.deck[self.current_card_indx]
         self.current_question, self.current_answer = current_card.split("|")
         self.card_text.update(f"Q: [italic]{self.current_question}")
@@ -101,21 +108,16 @@ class CardsApp(App):
             self.question_side = True
 
     def action_memorized(self):
+        # stop deck from doing out of bounds
+        if len(self.deck) == 0:
+            return
+
         card = self.deck[self.current_card_indx]
         self.memorized_cards.append(card)
         self.deck.remove(card)
 
-        if self.current_card_indx == len(self.deck):
-            self.current_card_indx -= 1
-
-        # ! Checking if the deck is out of cards needs to be moved
-        # ! Rn, moving the removing the last card crashes the app (out of bounds)
-        if len(self.deck) == 0:
-            self.push_screen("DoneScreen")
-            self.card_text.update("Well done! 🙌")
-        else:
-            # fyi because the card indx is set to auto update, nudging it like this refreshes the app
-            self.current_card_indx += 0
+        # fyi because the card indx is set to auto update, nudging it like this refreshes the app
+        self.current_card_indx += 0
 
     def action_shuffle_deck(self):
         shuffle(self.deck)
