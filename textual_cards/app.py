@@ -123,7 +123,7 @@ class CardsApp(App):
             self.current_card_indx -= 1
 
         # fyi because the card indx is set to auto update, nudging it like this refreshes the app
-        self.current_card_indx += 0
+        self.current_card_indx = self.current_card_indx
 
     def action_shuffle_deck(self):
         shuffle(self.deck)
