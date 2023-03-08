@@ -42,20 +42,25 @@ class CardsApp(App):
     CSS_PATH = "style.scss"
 
     deck = reactive([])
-    current_card_indx = reactive(0)
-    current_question = reactive("")
-    current_answer = reactive("")
-    question_side = reactive(False)
     memorized_cards = reactive([])
+    current_card_indx = reactive(int)
+    current_question = reactive(str)
+    current_answer = reactive(str)
+    question_side = reactive(bool)
 
     def watch_current_card_indx(self):
-        # todo - set question side to true
-        # todo - update current question & answer with current card Q/A
-        print(str(self.current_card_indx))
+        current_card = self.deck[self.current_card_indx]
+        self.current_question, self.current_answer = current_card.split("|")
+        self.card_text.update(f"Q: [italic]{self.current_question}")
+        self.current_card_num_label.update(f"[#a6da95]{self.current_card_indx + 1}[/]/{len(self.deck)}")
+
+        self.question_side = True
 
     def watch_question_side(self):
-        # todo - logic for changing the card text to appropriate Q/A
-        pass
+        if self.question_side:
+            self.card_text.update(f"Q: [italic]{self.current_question}")
+        else:
+            self.card_text.update(f"[#a6da95]{self.current_answer}")
 
     # def validate_current_card_indx(self, indx: int):
     #     # Figure out if this would prevent an out of bound expection
@@ -78,9 +83,6 @@ class CardsApp(App):
         self.deck = get_cards("deck")
         self.action_change_card(0)
 
-    def update_current_num_label(self):
-        self.current_card_num_label.update(f"[#a6da95]{self.current_card_indx + 1}[/]/{len(self.deck)}")
-
     def action_change_card(self, move_amt):
         # Creates a looping effect where the last card
         # wraps to the first and vice versa
@@ -91,30 +93,10 @@ class CardsApp(App):
         else:
             self.current_card_indx += move_amt
 
-        # ! these gets moved to watch_card_indx
-        card = self.deck[self.current_card_indx]
-        self.current_question, self.current_answer = card.split("|")
-        self.action_flip_card(question_side_up=True)
-        self.update_current_num_label()
-
-    def action_flip_card(self, question_side_up: Optional[bool] = None):
-        # ! Nix the argument
-        # ! This will all get replaced with a simple switch for to "flip the card over"
-        # ! (aka switch self.question_side from true to false or vice versa)
-        formatted_question = f"Q: [italic]{self.current_question}"
-
-        # used with self.change_card()
-        if question_side_up:
-            self.question_side = True
-            self.card_text.update(formatted_question)
-            return
-
-        # If not used with change card, flip the card back and forth
+    def action_flip_card(self):
         if self.question_side:
-            self.card_text.update(f"[#a6da95]{self.current_answer}")
             self.question_side = False
         else:
-            self.card_text.update(formatted_question)
             self.question_side = True
 
     def action_memorized(self):
@@ -122,17 +104,15 @@ class CardsApp(App):
         self.memorized_cards.append(card)
         self.deck.remove(card)
 
-        # ? | indx goes out of bounds if you move the last card in the deck to the memorized "pile"
-        # ? | without correcting the current card indx. I'm not smart enough to tell why at the moment
         if self.current_card_indx == len(self.deck):
             self.current_card_indx -= 1
 
-        self.update_current_num_label()
         if len(self.deck) == 0:
             self.push_screen("DoneScreen")
             self.card_text.update("Well done! 🙌")
         else:
-            self.action_change_card(0)
+            # ! Major: This whole app may need reconsidered
+            self.current_card_indx -= 1
 
     def action_shuffle_deck(self):
         shuffle(self.deck)
