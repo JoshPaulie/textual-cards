@@ -10,15 +10,6 @@ from textual.screen import Screen
 from textual.widgets import Footer, Label, Static
 
 
-class DoneScreen(Screen):
-    # todo app should totally exit (and eventually lead to a list of decks)
-    BINDINGS = [("escape,space,enter", "app.pop_screen", "Pop screen")]
-
-    def compose(self) -> ComposeResult:
-        with Container(id="DoneContainer"):
-            yield Static("Congrats! You've finished this deck. 🎉", id="CongratsStatic")
-
-
 def get_cards(path):
     cards = pathlib.Path(path).read_text().splitlines()
     cards = [card for card in cards if card]  # no blank lines
@@ -38,7 +29,7 @@ class CardsApp(App):
         # todo | maybe the user can add selected cards back to the deck?
         Binding("m", "show_memorized", "Currently prints a list", show=False),
     ]
-    SCREENS = {"DoneScreen": DoneScreen}
+    SCREENS = {}
     CSS_PATH = "style.scss"
 
     deck = reactive([])
@@ -52,7 +43,6 @@ class CardsApp(App):
     def watch_current_card_indx(self):
         # if no more cards, Done screen
         if len(self.deck) == 0:
-            self.push_screen("DoneScreen")
             self.card_text.update("Well done! 🙌")
             self.current_card_num_label.update(f"")
             return
