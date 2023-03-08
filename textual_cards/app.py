@@ -86,6 +86,7 @@ class CardsApp(App):
     def action_change_card(self, move_amt):
         # Creates a looping effect where the last card
         # wraps to the first and vice versa
+        # ? Can the wrapping logic be moved to a validator? And this just += the card indx? 🤔
         if self.current_card_indx == 0 and move_amt == -1:
             self.current_card_indx = len(self.deck) - 1
         elif self.current_card_indx == len(self.deck) - 1 and move_amt == 1:
