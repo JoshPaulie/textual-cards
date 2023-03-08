@@ -60,14 +60,22 @@ class CardsApp(App):
         else:
             self.card_text.update(f"[#a6da95]{self.current_answer}")
 
-    # def validate_current_card_indx(self, indx: int):
-    #     # ! Doesn't work, but I feel like we're getting closer
-    #     if indx < 0:
-    #         return len(self.deck) - 1
-    #     elif indx > len(self.deck):
-    #         return 0
-    #     else:
-    #         return indx
+    def validate_current_card_indx(self, indx: int):
+        # In my head, validate does the following
+        #   - self.current_card_indx notices a change
+        #   - the validate_ method sees what the potential change might be
+        #   - self.current_card_indx is set to whatever validate_ returns
+
+        # My goal:
+        #   - if the index is going to be <0, make the index the last value in self.deck
+        #   - if the index is > the len of deck, set it to 0
+        #   - if it's neither the start nor the end of the deck, no correction is needed and whatever was passed is returned
+        # this would create a wrapping effect
+        if indx < 0:
+            indx = len(self.deck) - 1
+        elif indx > len(self.deck):
+            indx = 0
+        return indx
 
     def compose(self) -> ComposeResult:
         with Vertical():
@@ -86,12 +94,7 @@ class CardsApp(App):
         self.action_change_card(0)
 
     def action_change_card(self, move_amt):
-        if self.current_card_indx == 0 and move_amt == -1:
-            self.current_card_indx = len(self.deck) - 1
-        elif self.current_card_indx == len(self.deck) - 1 and move_amt == 1:
-            self.current_card_indx = 0
-        else:
-            self.current_card_indx += move_amt
+        self.current_card_indx += move_amt
 
     def action_flip_card(self):
         if self.question_side:
