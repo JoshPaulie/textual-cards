@@ -118,12 +118,12 @@ class CardsApp(App):
 
     def action_shuffle_deck(self):
         shuffle(self.deck)
-        self.action_change_card(-self.current_card_indx)
+        self.current_card_indx = 0
 
     def action_reset_deck(self):
         self.deck.extend(self.memorized_cards)
         self.memorized_cards.clear()
-        self.action_change_card(-self.current_card_indx)
+        self.current_card_indx = 0
         self.action_shuffle_deck()
 
     def action_show_memorized(self):
