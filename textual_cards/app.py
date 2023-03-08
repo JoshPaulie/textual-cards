@@ -12,7 +12,7 @@ from textual.widgets import Footer, Label, Static
 
 class DoneScreen(Screen):
     # todo app should totally exit (and eventually lead to a list of decks)
-    BINDINGS = [("escape,space", "app.pop_screen", "Pop screen")]
+    BINDINGS = [("escape,space,enter", "app.pop_screen", "Pop screen")]
 
     def compose(self) -> ComposeResult:
         with Container(id="DoneContainer"):
@@ -54,6 +54,7 @@ class CardsApp(App):
         if len(self.deck) == 0:
             self.push_screen("DoneScreen")
             self.card_text.update("Well done! 🙌")
+            self.current_card_num_label.update(f"")
             return
 
         current_card = self.deck[self.current_card_indx]
