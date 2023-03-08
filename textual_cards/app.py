@@ -71,9 +71,13 @@ class CardsApp(App):
             self.card_text.update(f"[#a6da95]{self.current_answer}")
 
     # def validate_current_card_indx(self, indx: int):
-    #     # Figure out if this would prevent an out of bound expection
-    #     # or if I can move the wrapping logic here (? maybe 🤔)
-    #     pass
+    #     # ! Doesn't work, but I feel like we're getting closer
+    #     if indx < 0:
+    #         return len(self.deck) - 1
+    #     elif indx > len(self.deck):
+    #         return 0
+    #     else:
+    #         return indx
 
     def compose(self) -> ComposeResult:
         with Vertical():
@@ -92,9 +96,6 @@ class CardsApp(App):
         self.action_change_card(0)
 
     def action_change_card(self, move_amt):
-        # Creates a looping effect where the last card
-        # wraps to the first and vice versa
-        # ? Can the wrapping logic be moved to a validator? And this just += the card indx? 🤔
         if self.current_card_indx == 0 and move_amt == -1:
             self.current_card_indx = len(self.deck) - 1
         elif self.current_card_indx == len(self.deck) - 1 and move_amt == 1:
