@@ -89,6 +89,10 @@ class CardsApp(App):
         self.current_card_indx += move_amt
 
     def action_flip_card(self):
+        # no flip card if no card to be flipped 😡
+        if len(self.deck) == 0:
+            return
+
         if self.question_side:
             self.question_side = False
         else:
