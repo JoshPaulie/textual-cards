@@ -28,6 +28,7 @@ class CardsApp(App):
         # todo | this should push a screen with a list of all the memorized cards
         # todo | maybe the user can add selected cards back to the deck?
         Binding("m", "show_memorized", "Currently prints a list", show=False),
+        Binding("q,escape", "app.quit", "Quit", show=False),
     ]
     SCREENS = {}
     CSS_PATH = "style.scss"
