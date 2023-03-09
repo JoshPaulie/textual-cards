@@ -48,6 +48,9 @@ class CardsApp(App):
 
         current_card = self.deck[self.current_card_indx]
         self.current_question, self.current_answer = current_card.split("|")
+        self.current_question = self.current_question.strip()
+        self.current_answer = self.current_answer.strip()
+
         self.card_text.update(f"Q: [italic]{self.current_question}")
         self.current_card_num_label.update(f"[#a6da95]{self.current_card_indx + 1}[/]/{len(self.deck)}")
 
