@@ -73,7 +73,7 @@ class CardsApp(App):
         # this would create a wrapping effect
         if indx < 0:
             indx = len(self.deck) - 1
-        elif indx > len(self.deck):
+        elif indx > len(self.deck) - 1:
             indx = 0
         return indx
 
