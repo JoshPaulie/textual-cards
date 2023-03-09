@@ -85,7 +85,7 @@ class CardsApp(App):
 
     def on_mount(self) -> None:
         self.deck = get_cards("deck")
-        self.action_change_card(0)
+        self.current_card_indx = 0
 
     def action_change_card(self, move_amt: int) -> None:
         self.current_card_indx += move_amt
