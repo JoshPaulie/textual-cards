@@ -40,7 +40,8 @@ class CardsApp(App):
     current_answer = reactive(str)
     question_side = reactive(bool)
 
-    def watch_current_card_indx(self):
+    def watch_current_card_indx(self) -> None:
+        """Triggers whenever current_card_indx is modified"""
         if len(self.deck) == 0:
             self.card_text.update("Well done! 🙌")
             self.current_card_num_label.update(f"")
@@ -56,13 +57,14 @@ class CardsApp(App):
 
         self.question_side = True
 
-    def watch_question_side(self):
+    def watch_question_side(self) -> None:
         if self.question_side:
             self.card_text.update(f"Q: [italic]{self.current_question}")
         else:
             self.card_text.update(f"[#a6da95]{self.current_answer}")
 
-    def validate_current_card_indx(self, indx: int):
+    def validate_current_card_indx(self, indx: int) -> int:
+        """Provides looping effects, prevents deck from going out of bounds"""
         if indx < 0:
             indx = len(self.deck) - 1
         elif indx > len(self.deck) - 1:
@@ -81,14 +83,15 @@ class CardsApp(App):
 
         yield Footer()
 
-    def on_mount(self):
+    def on_mount(self) -> None:
         self.deck = get_cards("deck")
         self.action_change_card(0)
 
-    def action_change_card(self, move_amt):
+    def action_change_card(self, move_amt: int) -> None:
         self.current_card_indx += move_amt
 
-    def action_flip_card(self):
+    def action_flip_card(self) -> None:
+        """Swap the self.questions_side attribute, which determines which side of the card is "side up" """
         # no flip card if no card to be flipped 😡
         if len(self.deck) == 0:
             return
@@ -98,7 +101,8 @@ class CardsApp(App):
         else:
             self.question_side = True
 
-    def action_memorized(self):
+    def action_memorized(self) -> None:
+        """Moves current card from self.deck to self.memorized"""
         # stop deck from doing out of bounds
         if len(self.deck) == 0:
             return
@@ -114,17 +118,18 @@ class CardsApp(App):
         # fyi because the card indx is set to auto update, nudging it like this refreshes the app
         self.current_card_indx = self.current_card_indx
 
-    def action_shuffle_deck(self):
+    def action_shuffle_deck(self) -> None:
         shuffle(self.deck)
         self.current_card_indx = 0
 
-    def action_reset_deck(self):
+    def action_reset_deck(self) -> None:
+        """Move all the cards in self.memorized_cards back into the deck, shuffle it for goodluck"""
         self.deck.extend(self.memorized_cards)
         self.memorized_cards.clear()
         self.current_card_indx = 0
         self.action_shuffle_deck()
 
-    def action_show_memorized(self):
+    def action_show_memorized(self) -> None:
         print(self.memorized_cards)
 
 
