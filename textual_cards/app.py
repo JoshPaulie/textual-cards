@@ -39,9 +39,7 @@ class CardsApp(App):
     current_answer = reactive(str)
     question_side = reactive(bool)
 
-    # ! This function is PACKED. Needs iteration
     def watch_current_card_indx(self):
-        # if no more cards, Done screen
         if len(self.deck) == 0:
             self.card_text.update("Well done! 🙌")
             self.current_card_num_label.update(f"")
