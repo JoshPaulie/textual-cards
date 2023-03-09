@@ -50,11 +50,13 @@ python -m textual_cards
 After installation, run `cards` in your terminal. 💤 Your decks directory will be read, and a list presented. 💤 From this list you can pick which deck to load up 💤, and use the (hopefully intuitive) keyboard shortcuts 
 
 ### Decks
-Flashcards are collected as "deck" files, in the directory `~/decks`. 💤 This file is recursively checked, allowing for the decks to be categorized into subdirectories 💤
+Flashcards are collected as "deck" files, in the directory `~/decks`. 💤 This directory is recursively checked, allowing for the decks to be categorized into subdirectories 💤
 
 - These deck files can be named anything, but are "Pipe (`|`) seperated values" files
 - The left hand side of the `|` is the question, while the right is the answer
 - Each line in the deck file considered a [card](#cards)
+- Blank lines are ignored
+- Lines starting with # are considered comments and also ignored
 
 An example deck may look like
 ```
@@ -65,7 +67,7 @@ Textual is _________|So rad!
 
 #### Cards
 - Cards are `.strip()`ed, meaning any spaces at the end or begining of your question or answer will be trimmed off, allowing for cards like
-  - `How is bexli going to get this package & publish this app? | He has has no idea!`
+  - `How is bexli going to get this package & publish this app when he's done? | He has no idea!`
 
 ### Keyboard shortcuts
 All keyboard shortcuts can be found in the footer, expect
