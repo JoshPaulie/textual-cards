@@ -1,40 +1,40 @@
-$catpp-rosewater: #f4dbd6;
-$catpp-flamingo: #f0c6c6;
-$catpp-pink: #f5bde6;
-$catpp-mauve: #c6a0f6;
-$catpp-red: #ed8796;
-$catpp-maroon: #ee99a0;
-$catpp-peach: #f5a97f;
-$catpp-yellow: #eed49f;
-$catpp-green: #a6da95;
-$catpp-teal: #8bd5ca;
-$catpp-sky: #91d7e3;
-$catpp-sapphire: #7dc4e4;
-$catpp-blue: #8aadf4;
-$catpp-lavender: #b7bdf8;
-$catpp-text: #cad3f5;
-$catpp-subtext1: #b8c0e0;
-$catpp-subtext0: #a5adcb;
-$catpp-overlay2: #939ab7;
-$catpp-overlay1: #8087a2;
-$catpp-overlay0: #6e738d;
-$catpp-surface2: #5b6078;
-$catpp-surface1: #494d64;
-$catpp-surface0: #363a4f;
-$catpp-base: #24273a;
-$catpp-mantle: #1e2030;
-$catpp-crust: #181926;
+$ctp-rosewater: #f4dbd6;
+$ctp-flamingo: #f0c6c6;
+$ctp-pink: #f5bde6;
+$ctp-mauve: #c6a0f6;
+$ctp-red: #ed8796;
+$ctp-maroon: #ee99a0;
+$ctp-peach: #f5a97f;
+$ctp-yellow: #eed49f;
+$ctp-green: #a6da95;
+$ctp-teal: #8bd5ca;
+$ctp-sky: #91d7e3;
+$ctp-sapphire: #7dc4e4;
+$ctp-blue: #8aadf4;
+$ctp-lavender: #b7bdf8;
+$ctp-text: #cad3f5;
+$ctp-subtext1: #b8c0e0;
+$ctp-subtext0: #a5adcb;
+$ctp-overlay2: #939ab7;
+$ctp-overlay1: #8087a2;
+$ctp-overlay0: #6e738d;
+$ctp-surface2: #5b6078;
+$ctp-surface1: #494d64;
+$ctp-surface0: #363a4f;
+$ctp-base: #24273a;
+$ctp-mantle: #1e2030;
+$ctp-crust: #181926;
 
 Screen {
-  background: $catpp-base;
-  color: $catpp-text;
+  background: $ctp-base;
+  color: $ctp-text;
 }
 
 #Card {
   height: 6fr;
-  border: tall $catpp-surface0;
+  border: tall $ctp-surface0;
   align: center middle;
-  background: $catpp-crust;
+  background: $ctp-crust;
 }
 
 #StatusBar {
@@ -52,31 +52,31 @@ Screen {
 }
 
 Footer {
-  background: $catpp-base;
-  color: $catpp-text;
+  background: $ctp-base;
+  color: $ctp-text;
   dock: bottom;
   height: 1;
 }
 
 Footer > .footer--highlight {
-  background: $catpp-base;
-  color: $catpp-green;
+  background: $ctp-base;
+  color: $ctp-green;
 }
 
 Footer > .footer--highlight-key {
-  background: $catpp-surface0;
+  background: $ctp-surface0;
   text-style: bold;
 }
 
 Footer > .footer--key {
   text-style: bold;
-  background: $catpp-mantle;
+  background: $ctp-mantle;
 }
 
 /* Done Screen */
 #DoneContainer {
   align: center middle;
-  border: solid $catpp-surface0;
+  border: solid $ctp-surface0;
 }
 
 #CongratsStatic {
