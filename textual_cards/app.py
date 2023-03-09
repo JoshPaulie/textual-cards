@@ -61,16 +61,6 @@ class CardsApp(App):
             self.card_text.update(f"[#a6da95]{self.current_answer}")
 
     def validate_current_card_indx(self, indx: int):
-        # In my head, validate does the following
-        #   - self.current_card_indx notices a change
-        #   - the validate_ method sees what the potential change might be
-        #   - self.current_card_indx is set to whatever validate_ returns
-
-        # My goal:
-        #   - if the index is going to be <0, make the index the last value in self.deck
-        #   - if the index is > the len of deck, set it to 0
-        #   - if it's neither the start nor the end of the deck, no correction is needed and whatever was passed is returned
-        # this would create a wrapping effect
         if indx < 0:
             indx = len(self.deck) - 1
         elif indx > len(self.deck) - 1:
