@@ -28,7 +28,7 @@ pipx install <TBD>
 ```
 
 ### Manual
-> If you, for whatever reason, want to use it *now*, follow these steps & read [usage](#usage)
+> If you, for whatever reason, want to use it *now*, follow these steps & read [development usage](#usage) section
 ```console
 git clone https://github.com/joshpaulie/textual-cards
 cd textual-cards
@@ -39,10 +39,10 @@ python -m textual_cards
 ```
 
 ## Usage
-> These usage instructions are for the concept of the app. The app lacks most of this functionality as-is.
-> To use the app during development, follow the [manual install](#manual) instructions
+> **These usage instructions are for the concept of the app**. The app lacks functionality as-is.
+> To use the app during development, follow the [manual install](#manual) instructions and the modified development usage instructions below
 > 
-> While inside the repo directory, edit the `deck` file with your pipe (`|`) seperated Q & A lines. Most of the following applies, but only 1 deck can be loaded at a time and it must be in the example one in repo
+> **Development usage**: While inside the repo directory, edit the `deck` file with your pipe (`|`) seperated Q & A lines. Most of the following applies, but only 1 deck can be loaded at a time
 > 
 > Anything annotated with 💤 are features yet to be implemented
 
