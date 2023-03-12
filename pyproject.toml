@@ -17,12 +17,12 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: Implementation :: CPython",
 ]
-dependencies = ["textual==0.13.0"]
+dependencies = ["textual==0.14.0"]
 dynamic = ["version"]
 
 [project.optional-dependencies]
 dev = [
-  "textual[dev]==0.13.0",
+  "textual[dev]==0.14.0",
   "black",
   "pylint"
 ]
