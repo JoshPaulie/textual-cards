@@ -9,6 +9,8 @@ from textual.reactive import reactive
 from textual.screen import Screen
 from textual.widgets import Footer, Label, Static
 
+from .screens.pick_deck import PickDeckScreen
+
 
 def get_cards(path):
     cards = pathlib.Path(path).read_text().splitlines()
@@ -86,6 +88,7 @@ class CardsApp(App):
     def on_mount(self) -> None:
         self.deck = get_cards("deck")
         self.current_card_indx = 0
+        self.push_screen(PickDeckScreen())
 
     def action_change_card(self, move_amt: int) -> None:
         self.current_card_indx += move_amt
