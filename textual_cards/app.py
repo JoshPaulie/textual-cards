@@ -12,7 +12,7 @@ from textual.widgets import Footer, Label, Static
 from .screens.pick_deck import PickDeckScreen
 
 
-def get_cards(path):
+def get_cards(path: str) -> list[str]:
     cards = pathlib.Path(path).read_text().splitlines()
     cards = [card for card in cards if card]  # no blank lines
     cards = [card for card in cards if not card.startswith("#")]  # no comment lines
@@ -86,9 +86,10 @@ class CardsApp(App):
         yield Footer()
 
     def on_mount(self) -> None:
+        self.push_screen(PickDeckScreen())
+        # todo "Bubble up" (?) selection, pass to get_cards()
         self.deck = get_cards("deck")
         self.current_card_indx = 0
-        self.push_screen(PickDeckScreen())
 
     def action_change_card(self, move_amt: int) -> None:
         self.current_card_indx += move_amt
