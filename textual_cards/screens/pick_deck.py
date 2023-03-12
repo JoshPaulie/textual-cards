@@ -12,7 +12,8 @@ class PickDeckScreen(Screen):
     """
 
     def compose(self):
-        yield ListView(
+        self.decks_list_view = ListView
+        yield self.decks_list_view(
             ListItem(Static("1")),
             ListItem(Static("2")),
             ListItem(Static("3")),
