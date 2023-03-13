@@ -27,6 +27,7 @@ class CardsApp(App):
         Binding("enter", "memorized", "Got it! 👍", key_display="⏎"),
         Binding("s", "shuffle_deck", "Shuffle"),
         Binding("r", "reset_deck", "Reset"),
+        Binding("c", "change_deck", "Change"),
         # todo | this should push a screen with a list of all the memorized cards
         # todo | maybe the user can add selected cards back to the deck?
         Binding("m", "show_memorized", "Currently prints a list", show=False),
@@ -47,6 +48,7 @@ class CardsApp(App):
         if self.deck_path:
             self.deck = get_cards(self.deck_path)
             self.current_card_indx = 0
+            self.memorized_cards.clear()
 
     def watch_current_card_indx(self) -> None:
         """Triggers whenever current_card_indx is modified"""
@@ -137,6 +139,9 @@ class CardsApp(App):
 
     def action_show_memorized(self) -> None:
         print(self.memorized_cards)
+
+    def action_change_deck(self) -> None:
+        self.push_screen(PickDeckScreen())
 
 
 def main():
