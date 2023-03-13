@@ -18,17 +18,13 @@ class DeckListItem(ListItem):
 
 
 class PickDeckScreen(Screen):
-    DEFAULT_CSS = """\
+    DEFAULT_CSS = """
     Static {
         text-align: center;
         padding-top: 1;
         padding-bottom: 1;
     }
     """
-
-    BINDINGS = [
-        Binding("escape", "app.pop_screen", "debug binding"),  # todo - remove before merge
-    ]
 
     def compose(self):
         self.decks_list_view = ListView()
