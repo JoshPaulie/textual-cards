@@ -72,3 +72,21 @@ Footer > .footer--key {
   text-style: bold;
   background: $ctp-mantle;
 }
+
+ListItem {
+    color: $ctp-text;
+    background: $ctp-surface0
+}
+ListItem > Widget :hover {
+    color: $ctp-green;
+    background: $ctp-surface1
+}
+ListView > ListItem.--highlight {
+    background: $ctp-surface0
+}
+ListView:focus > ListItem.--highlight {
+    background: $ctp-surface1
+}
+ListItem > Widget {
+    height: auto;
+}

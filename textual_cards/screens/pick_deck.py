@@ -7,32 +7,6 @@ from textual.widgets import Label, ListItem, ListView, Static
 
 
 class DeckListItem(ListItem):
-    # todo - move to style.scss
-    DEFAULT_CSS = """
-    $ctp-green: #a6da95;
-    $ctp-text: #cad3f5;
-    $ctp-surface1: #494d64;
-    $ctp-surface0: #363a4f;
-    ListItem {
-        color: $ctp-text;
-        background: $ctp-surface0
-    }
-    ListItem > Widget :hover {
-        color: $ctp-green;
-        background: $ctp-surface1
-    }
-    ListView > ListItem.--highlight {
-        background: $ctp-surface0
-    }
-    ListView:focus > ListItem.--highlight {
-        background: $ctp-surface1
-    }
-    ListItem > Widget {
-        height: auto;
-    }
-    """
-
-    # ! this can't be right but idk, this works
     def __init__(self, deck_path: pathlib.Path, *args, **kwargs) -> None:
         """Initialise the input."""
 
