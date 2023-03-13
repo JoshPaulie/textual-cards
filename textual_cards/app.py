@@ -35,12 +35,18 @@ class CardsApp(App):
     SCREENS = {}
     CSS_PATH = "style.scss"
 
+    deck_path = reactive(str)
     deck = reactive([])
     memorized_cards = reactive([])
     current_card_indx = reactive(int, always_update=True)
     current_question = reactive(str)
     current_answer = reactive(str)
     question_side = reactive(bool)
+
+    def watch_deck_path(self) -> None:
+        if self.deck_path:
+            self.deck = get_cards(self.deck_path)
+            self.current_card_indx = 0
 
     def watch_current_card_indx(self) -> None:
         """Triggers whenever current_card_indx is modified"""
@@ -82,14 +88,10 @@ class CardsApp(App):
             with Horizontal(id="StatusBar"):
                 self.current_card_num_label = Static(id="CardNumLabel")
                 yield self.current_card_num_label
-
         yield Footer()
 
     def on_mount(self) -> None:
         self.push_screen(PickDeckScreen())
-        # todo "Bubble up" (?) selection, pass to get_cards()
-        self.deck = get_cards("deck")
-        self.current_card_indx = 0
 
     def action_change_card(self, move_amt: int) -> None:
         self.current_card_indx += move_amt

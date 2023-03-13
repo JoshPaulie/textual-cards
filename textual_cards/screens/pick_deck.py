@@ -73,4 +73,6 @@ class PickDeckScreen(Screen):
     # This gives me anxiety, it feels so hacky 😬
     def on_list_view_selected(self, item):
         deck_path = item.item.deck_path
-        self.post_message(deck_path)
+        # fyi I was unable to "query" the reactive element
+        self.app.deck_path = deck_path  # type: ignore 😅
+        self.app.pop_screen()
