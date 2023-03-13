@@ -57,6 +57,10 @@ class CardsApp(App):
             self.current_card_num_label.update(f"")
             return
 
+        # fyi if the pervious card was multi-lined and the new card is single, a graphical glitch occurs.
+        # fyi quick remedy: clear the card text before updating it
+        self.card_text.update("")
+
         current_card = self.deck[self.current_card_indx]
         self.current_question, self.current_answer = current_card.split("|")
         self.current_question = self.current_question.strip()
