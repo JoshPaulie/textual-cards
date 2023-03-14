@@ -11,7 +11,7 @@
     - [Manual](#manual)
   - [Usage](#usage)
     - [Decks](#decks)
-      - [Cards](#cards)
+    - [Cards](#cards)
     - [Keyboard shortcuts](#keyboard-shortcuts)
   - [License](#license)
 
@@ -28,7 +28,7 @@ pipx install <TBD>
 ```
 
 ### Manual
-> If you, for whatever reason, want to use it *now*, follow these steps & read [development usage](#usage) section
+> If you, for whatever reason, want to use it *now*
 ```console
 git clone https://github.com/joshpaulie/textual-cards
 cd textual-cards
@@ -39,33 +39,28 @@ python -m textual_cards
 ```
 
 ## Usage
-> **These usage instructions are for the concept of the app**. The app lacks functionality as-is.
-> To use the app during development, follow the [manual install](#manual) instructions and the modified development usage instructions below
+> **In development**: The app lacks some functionality as-is
 > 
-> **Development usage**: While inside the repo directory, edit the `deck` file with your pipe (`|`) seperated Q & A lines. Most of the following applies, but only 1 deck can be loaded at a time
+> To use the app during development, follow the [manual install](#manual) steps and read below
 > 
 > Anything annotated with 💤 are features yet to be implemented
 
-
-After installation, run `cards` in your terminal. 💤 Your decks directory will be read, and a list presented. 💤 From this list you can pick which deck to load up 💤, and use the (hopefully intuitive) keyboard shortcuts 
+1. [Install](#installation)
+2. Run `cards` 💤
+3. Your `~/decks` directory will be read, and a list of decks presented
+4. Pick which deck to load up, start studying! 🤓
 
 ### Decks
-Flashcards are collected as "deck" files, in the directory `~/decks`. 💤 This directory is recursively checked, allowing for the decks to be categorized into subdirectories 💤
+Flashcards are collected as "deck" files, in the directory `~/decks`. This directory is recursively checked, allowing for the decks to be categorized into subdirectories
 
 - These deck files can be named anything, but are "Pipe (`|`) seperated values" files
-- The left hand side of the `|` is the question, while the right is the answer
 - Each line in the deck file considered a [card](#cards)
+
+### Cards
+- Cards are represented as line entries in your deck file
+- They are pipe (`|`) seperated, each line using the syntax `Question | Answer`
 - Blank lines are ignored
-- Lines starting with # are considered comments and also ignored
-
-An example deck may look like
-```
-What is the powerhouse of the cell?|The mitochondria
-Who is the best programmer? | bexli, of course
-Textual is _________|So rad!
-```
-
-#### Cards
+- Lines starting with `#` are considered comments and also ignored
 - Cards are `.strip()`ed, meaning any spaces at the end or begining of your question or answer will be trimmed off, allowing for cards like
   - `How is bexli going to get this package & publish this app when he's done? | He has no idea!`
 
