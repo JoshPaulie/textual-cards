@@ -46,8 +46,8 @@ python -m textual_cards
 > Anything annotated with 💤 are features yet to be implemented
 
 1. [Install](#installation)
-2. Run `cards` 💤
-3. Your `~/decks` directory will be read, and a list of decks presented
+2. Create `~/decks` directory, create your [deck](#decks) files
+3. Run `cards` 💤
 4. Pick which deck to load up, start studying! 🤓
 
 ### Decks
