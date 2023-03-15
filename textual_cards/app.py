@@ -11,6 +11,7 @@ from textual.screen import Screen
 from textual.widgets import Footer, Label, Static
 
 from .screens.pick_deck import PickDeckScreen
+from .static.ctp_colors import ctp_green
 
 
 def get_cards(path: str) -> list[str]:
@@ -68,7 +69,7 @@ class CardsApp(App):
         self.current_answer = Text(self.current_answer.strip())
 
         self.card_text.update(f"Q: [italic]{self.current_question}")
-        self.current_card_num_label.update(f"[#a6da95]{self.current_card_indx + 1}[/]/{len(self.deck)}")
+        self.current_card_num_label.update(f"[{ctp_green}]{self.current_card_indx + 1}[/]/{len(self.deck)}")
 
         self.question_side = True
 
@@ -76,7 +77,7 @@ class CardsApp(App):
         if self.question_side:
             self.card_text.update(f"Q: [italic]{self.current_question}")
         else:
-            self.card_text.update(f"[#a6da95]{self.current_answer}")
+            self.card_text.update(f"[{ctp_green}]{self.current_answer}")
 
     def validate_current_card_indx(self, indx: int) -> int:
         """Provides looping effects, prevents deck from going out of bounds"""
