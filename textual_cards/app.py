@@ -44,7 +44,7 @@ class CardsApp(App):
     current_card_indx = reactive(int, always_update=True)
     current_question = reactive(str)
     current_answer = reactive(str)
-    question_side = reactive(bool)
+    question_side = reactive(bool, always_update=True)
 
     def watch_deck_path(self) -> None:
         if self.deck_path:
@@ -68,7 +68,6 @@ class CardsApp(App):
         self.current_question = Text(self.current_question.strip())
         self.current_answer = Text(self.current_answer.strip())
 
-        self.card_text.update(f"Q: [italic]{self.current_question}")
         self.current_card_num_label.update(f"[{ctp_green}]{self.current_card_indx + 1}[/]/{len(self.deck)}")
 
         self.question_side = True
