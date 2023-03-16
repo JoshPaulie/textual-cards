@@ -6,6 +6,7 @@ from textual.screen import Screen
 from textual.widgets import Label, ListItem, ListView, Static
 
 from .decks_path_not_found import DecksPathNotFoundScreen
+from .no_decks_found import NoDecksFoundScreen
 
 
 class DeckListItem(ListItem):
@@ -48,6 +49,10 @@ class PickDeckScreen(Screen):
             if not file.is_file():
                 continue
             self.decks_list_view.append(DeckListItem(file))
+
+        if not len(self.decks_list_view):
+            self.app.push_screen(NoDecksFoundScreen())
+
         self.decks_list_view.focus()
 
     # This gives me anxiety, it feels so hacky 😬
