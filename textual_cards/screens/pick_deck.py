@@ -1,9 +1,11 @@
+import os
 import pathlib
 
 from textual.app import ComposeResult
-from textual.binding import Binding
 from textual.screen import Screen
 from textual.widgets import Label, ListItem, ListView, Static
+
+from .decks_not_found import DecksNotFoundScreen
 
 
 class DeckListItem(ListItem):
@@ -36,13 +38,11 @@ class PickDeckScreen(Screen):
         else:
             decks_dir: pathlib.Path = pathlib.Path.home() / "decks"
 
-        # push error screen if dir not found
-        # create the dir?
-        # push error screen if dir is found, but empty
-        # copy sample_deck?
+        if not decks_dir.exists():
+            self.app.push_screen(DecksNotFoundScreen())
 
-        decks = decks_path.rglob("*")
-        for file in decks:
+        deck_files = decks_dir.rglob("*")
+        for file in deck_files:
             if file.name.startswith("."):
                 continue
             if not file.is_file():
