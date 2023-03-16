@@ -15,5 +15,5 @@ class DecksPathNotFoundScreen(Screen):
     """
 
     def compose(self) -> ComposeResult:
-        yield Static("No decks found! 😱")
+        yield Static("No decks directory found! 😱")
         yield Static(f"Create a directory named [bold]decks[/] in [{ctp_green}]{pathlib.Path.home()}")
