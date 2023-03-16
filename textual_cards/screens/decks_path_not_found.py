@@ -7,7 +7,7 @@ from textual.widgets import Static
 ctp_green = "#a6da95"
 
 
-class DecksNotFoundScreen(Screen):
+class DecksPathNotFoundScreen(Screen):
     DEFAULT_CSS = """
     Screen {
         align: center middle;
