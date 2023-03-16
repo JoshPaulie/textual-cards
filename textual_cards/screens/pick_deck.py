@@ -31,11 +31,10 @@ class PickDeckScreen(Screen):
         yield self.decks_list_view
 
     def on_mount(self):
-        # check env var for alt path
-        # if so:
-        #   use that path
-        # if not:
-        decks_path: pathlib.Path = pathlib.Path.home() / "decks"
+        if custom_path := os.getenv("DECK_PATH"):
+            decks_dir: pathlib.Path = pathlib.Path(custom_path)
+        else:
+            decks_dir: pathlib.Path = pathlib.Path.home() / "decks"
 
         # push error screen if dir not found
         # create the dir?
