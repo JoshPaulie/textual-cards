@@ -11,6 +11,7 @@
     - [Manual](#manual)
   - [Usage](#usage)
     - [Decks](#decks)
+      - [Custom *Deck Path*](#custom-deck-path)
     - [Cards](#cards)
     - [Keyboard shortcuts](#keyboard-shortcuts)
   - [License](#license)
@@ -55,13 +56,21 @@ Flashcards are collected as "deck" files, in the directory `~/decks`. This direc
 
 - These deck files can be named anything, but are "Pipe (`|`) seperated values" files
 - Each line in the deck file considered a [card](#cards)
+- Check out this [example deck](sample_deck.txt)
+
+#### Custom *Deck Path*
+If you don't like `~/decks`, and directory can be specified. Simply set an environment variable for `DECK_PATH`
+- `export DECK_PATH=path/to/deck/files` ← Add to your shell rc Linux/MacOS
+- [Windows instructions](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.3#saving-environment-variables-with-the-system-control-panel)
 
 ### Cards
-- Cards are represented as line entries in your deck file
-- They are pipe (`|`) seperated, each line using the syntax `Question | Answer`
-- Blank lines are ignored
-- Lines starting with `#` are considered comments and also ignored
-- Cards are `.strip()`ed, meaning any spaces at the end or begining of your question or answer will be trimmed off, allowing for cards like
+- are represented as line entries in your deck file
+- are pipe (`|`) seperated, each line using the syntax `Question | Answer`
+- ignore blank lines
+- ignore lines starting with `#` (comments)
+- can be styled with Rich's "[Console Markup](https://rich.readthedocs.io/en/latest/markup.html)"
+  - for example `The [green]mitochondria[/] is the _____ of the cell?`
+- ignore trailing and leading whitespace (tabs, spaces), allowing for cards like
   - `How is bexli going to get this package & publish this app when he's done? | He has no idea!`
 
 ### Keyboard shortcuts
